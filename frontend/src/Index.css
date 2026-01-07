@@ -1,0 +1,158 @@
+/* Global */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Navbar */
+.black-navbar {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  margin: 16px auto;
+  width: calc(100% - 200px);
+  height: 70px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+}
+
+/* Buttons */
+.btn-gradient {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border: none;
+  color: white;
+  border-radius: 30px;
+}
+
+/* Mobile graphic */
+.mobile-chart-wrapper {
+  position: relative;
+}
+
+.mobile-icon {
+  font-size: 280px;
+  opacity: 0.15;
+}
+
+/* Animated Pie Chart */
+.pie-chart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  background: conic-gradient(
+    #ffc107 0deg 0deg,
+    #ff9800 0deg 0deg,
+    #ff5722 0deg 0deg
+  );
+  animation: fillPie 1.8s ease-out forwards;
+}
+
+/* Donut hole */
+.pie-chart::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  background: rgba(120, 110, 200, 0.9);
+  border-radius: 50%;
+}
+
+/* Animation */
+@keyframes fillPie {
+  to {
+    background: conic-gradient(
+      #ffc107 0deg 140deg,
+      #ff9800 140deg 260deg,
+      #ff5722 260deg 360deg
+    );
+  }
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .mobile-icon {
+    font-size: 220px;
+  }
+
+  .pie-chart {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+@media (min-width: 992px) {
+  .pie-chart {
+    width: 120px;
+    height: 120px;
+  }
+}
+/* Features Section */
+.features-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #5f6bdc, #6f42c1);
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 40px 25px;
+  text-align: center;
+  color: white;
+  height: 100%;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.35s ease;
+}
+
+.feature-card i {
+  font-size: 44px;
+  margin-bottom: 20px;
+  color: #ffc107;
+}
+
+.feature-card h5 {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+}
+.footer-section {
+  background: linear-gradient(135deg, #5f6bdc, #6f42c1);
+  color: #fff;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 14px;
+  margin: 0;
+}
+
+.footer-section p {
+  margin: 0;
+  opacity: 0.9;
+}
+
