@@ -81,38 +81,61 @@ const Transactions = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg fixed-top navbar-dark black-navbar">
         <div className="container-fluid px-4">
-          <Link className="navbar-brand fw-bold text-white" to="/dashboard">
+          <a className="navbar-brand fw-bold text-white" href="#">
             <i className="fas fa-chart-line me-2"></i>
             FinanceTracker Pro
-          </Link>
+          </a>
 
-          <div className="collapse navbar-collapse show">
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto align-items-center">
               <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/dashboard">
+                <a className="nav-link text-white" href="/dashboard">
                   Dashboard
-                </Link>
+                </a>
               </li>
 
               <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/transactions">
+                <a className="nav-link text-white" href="/transactions">
                   Transactions
-                </Link>
+                </a>
               </li>
 
               <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/category_list">
+                <a className="nav-link text-white" href="/category_list">
                   Categories
-                </Link>
+                </a>
               </li>
 
+              <li className="nav-item ms-3">
+                <a className="nav-link text-white" href="/budget_list">
+                  Budget
+                </a>
+              </li>
+              <li className="nav-item ms-3">
+                <a className="nav-link text-white" href="/analytics">
+                  Analytics
+                </a>
+              </li>
+
+              {/* Profile Dropdown */}
               <li className="nav-item dropdown ms-3">
                 <button
-                  className="btn btn-light btn-sm dropdown-toggle"
+                  className="btn btn-light btn-sm fw-semibold dropdown-toggle"
                   data-bs-toggle="dropdown"
                 >
-                  <i className="fas fa-user me-1"></i> {username}
+                  <i className="fas fa-user me-1"></i>
+                  {username}
                 </button>
+
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <button

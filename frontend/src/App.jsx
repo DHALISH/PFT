@@ -8,6 +8,7 @@ import Transactions from "./Transaction.jsx";
 import Transactions_history from "./Transactions_history.jsx";
 import Budget from "./Budget.jsx";
 import Budget_list from "./Budget_list.jsx";
+import Analytics from "./Analytics.jsx";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/transactions_history" element={<Transactions_history />} />
         <Route path="/budget" element={<Budget />} />
         <Route path="/budget_list" element={<Budget_list />} />
+        <Route path="/analytics" element={<Analytics />} />
 
       </Routes>
     </BrowserRouter>

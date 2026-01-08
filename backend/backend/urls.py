@@ -25,6 +25,7 @@ from app.views import (
     login_view,
     CategoryViewSet,
     TransactionViewSet,
+    analytics_view
 )
 
 router = DefaultRouter()
@@ -41,6 +42,7 @@ urlpatterns = [
     # Budget & Goal APIs
     path('api/budget/add/', BudgetCreateView.as_view(), name='budget-add'),
     path('api/budgets/', BudgetListAPIView.as_view(), name='budget-list'),
+    path('api/analytics/', analytics_view, name='analytics'),
 
     # Router APIs
     path('api/', include(router.urls)),

@@ -93,7 +93,7 @@ const Dashboard = () => {
                 </a>
               </li>
               <li className="nav-item ms-3">
-                <a className="nav-link text-white" href="#">
+                <a className="nav-link text-white" href="/analytics">
                   Analytics
                 </a>
               </li>

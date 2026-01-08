@@ -84,7 +84,71 @@ const Budget = () => {
             <i className="fas fa-chart-line me-2"></i>
             FinanceTracker Pro
           </a>
-          {/* ... rest of navbar unchanged ... */}
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto align-items-center">
+              <li className="nav-item ms-3">
+                <a className="nav-link text-white" href="/dashboard">
+                  Dashboard
+                </a>
+              </li>
+
+              <li className="nav-item ms-3">
+                <a className="nav-link text-white" href="/transactions">
+                  Transactions
+                </a>
+              </li>
+
+              <li className="nav-item ms-3">
+                <a className="nav-link text-white" href="/category_list">
+                  Categories
+                </a>
+              </li>
+
+              <li className="nav-item ms-3">
+                <a className="nav-link text-white" href="/budget_list">
+                  Budget
+                </a>
+              </li>
+              <li className="nav-item ms-3">
+                <a className="nav-link text-white" href="/analytics">
+                  Analytics
+                </a>
+              </li>
+
+              {/* Profile Dropdown */}
+              <li className="nav-item dropdown ms-3">
+                <button
+                  className="btn btn-light btn-sm fw-semibold dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                >
+                  <i className="fas fa-user me-1"></i>
+                  {username}
+                </button>
+
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <button
+                      className="dropdown-item text-danger"
+                      onClick={handleLogout}
+                    >
+                      <i className="fas fa-sign-out-alt me-2"></i>
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
 

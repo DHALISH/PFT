@@ -121,35 +121,34 @@ const Category_list = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto align-items-center">
               <li className="nav-item ms-3">
-                <a className="nav-link text-white" href="dashboard">
+                <a className="nav-link text-white" href="/dashboard">
                   Dashboard
                 </a>
               </li>
+
               <li className="nav-item ms-3">
-                <a className="nav-link text-white" href="Transactions">
+                <a className="nav-link text-white" href="/transactions">
                   Transactions
                 </a>
               </li>
+
               <li className="nav-item ms-3">
-                <a className="nav-link text-white" href="category_list">
+                <a className="nav-link text-white" href="/category_list">
                   Categories
                 </a>
               </li>
+
               <li className="nav-item ms-3">
-                <a className="nav-link text-white" href="#">
+                <a className="nav-link text-white" href="/budget_list">
                   Budget
                 </a>
               </li>
               <li className="nav-item ms-3">
-                <a className="nav-link text-white" href="#">
-                  Goal
-                </a>
-              </li>
-              <li className="nav-item ms-3">
-                <a className="nav-link text-white" href="#">
+                <a className="nav-link text-white" href="/analytics">
                   Analytics
                 </a>
               </li>
+
               {/* Profile Dropdown */}
               <li className="nav-item dropdown ms-3">
                 <button

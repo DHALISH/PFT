@@ -43,10 +43,10 @@ const Budgets = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg fixed-top navbar-dark black-navbar">
         <div className="container-fluid px-4">
-          <Link className="navbar-brand fw-bold text-white" to="/">
+          <a className="navbar-brand fw-bold text-white" href="#">
             <i className="fas fa-chart-line me-2"></i>
             FinanceTracker Pro
-          </Link>
+          </a>
 
           <button
             className="navbar-toggler"
@@ -60,34 +60,32 @@ const Budgets = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto align-items-center">
               <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/dashboard">
+                <a className="nav-link text-white" href="/dashboard">
                   Dashboard
-                </Link>
+                </a>
               </li>
+
               <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/transactions">
+                <a className="nav-link text-white" href="/transactions">
                   Transactions
-                </Link>
+                </a>
               </li>
+
               <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/category_list">
+                <a className="nav-link text-white" href="/category_list">
                   Categories
-                </Link>
+                </a>
               </li>
+
               <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/budget">
+                <a className="nav-link text-white" href="/budget_list">
                   Budget
-                </Link>
+                </a>
               </li>
               <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/budget_list">
-                  Goal
-                </Link>
-              </li>
-              <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/analytics">
+                <a className="nav-link text-white" href="/analytics">
                   Analytics
-                </Link>
+                </a>
               </li>
 
               {/* Profile Dropdown */}

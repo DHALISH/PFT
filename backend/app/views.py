@@ -13,6 +13,8 @@ from .serializers import CategorySerializer, TransactionSerializer,BudgetlistSer
 from .models import Category, Transaction, Budget
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
+from django.db.models import Sum
+from django.db.models.functions import TruncMonth
 
 class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
@@ -78,3 +80,88 @@ class BudgetCreateView(CreateAPIView):
 
 
 
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def analytics_view(request):
+    user = request.user
+
+    # ===============================
+    # Monthly Income & Expense (Chart)
+    # ===============================
+    monthly = (
+        Transaction.objects
+        .filter(user=user)
+        .annotate(month=TruncMonth("date"))
+        .values("month", "type")
+        .annotate(total=Sum("amount"))
+        .order_by("month")
+    )
+
+    month_map = {}
+
+    for item in monthly:
+        month = item["month"].strftime("%b %Y")
+        if month not in month_map:
+            month_map[month] = {"income": 0, "expense": 0}
+
+        if item["type"] == "income":
+            month_map[month]["income"] = float(item["total"])
+        else:
+            month_map[month]["expense"] = float(item["total"])
+
+    labels = list(month_map.keys())
+    income = [v["income"] for v in month_map.values()]
+    expenses = [v["expense"] for v in month_map.values()]
+
+    # ===============================
+    # Totals (Dashboard Cards)
+    # ===============================
+    total_income = (
+        Transaction.objects
+        .filter(user=user, type="income")
+        .aggregate(total=Sum("amount"))["total"] or 0
+    )
+
+    total_expense = (
+        Transaction.objects
+        .filter(user=user, type="expense")
+        .aggregate(total=Sum("amount"))["total"] or 0
+    )
+
+    balance = total_income - total_expense
+
+    # ===============================
+    # Top Expense Categories (Pie)
+    # ===============================
+    top_expenses_qs = (
+        Transaction.objects
+        .filter(user=user, type="expense")
+        .values("category__name")
+        .annotate(amount=Sum("amount"))
+        .order_by("-amount")[:5]
+    )
+
+    top_expenses = []
+    for item in top_expenses_qs:
+        percentage = (
+            (item["amount"] / total_expense) * 100
+            if total_expense else 0
+        )
+        top_expenses.append({
+            "category": item["category__name"],
+            "amount": float(item["amount"]),
+            "percentage": round(percentage, 1)
+        })
+
+    # ===============================
+    # Final Response
+    # ===============================
+    return Response({
+        "labels": labels,
+        "income": income,
+        "expenses": expenses,
+        "total_income": float(total_income),
+        "total_expense": float(total_expense),
+        "balance": float(balance),
+        "top_expenses": top_expenses,
+    })
