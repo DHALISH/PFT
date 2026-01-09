@@ -3,13 +3,29 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+# models.py
+from django.db import models
+from django.contrib.auth.models import User
+
 class Category(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="categories")
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="categories",
+        null=True,
+        blank=True
+    )
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
+    is_default = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ("user", "name")
+        ordering = ["name"]
 
     def __str__(self):
-        return f"{self.name} - {self.user.username}"
+        return f"{self.name} ({'Default' if self.is_default else self.user.username})"
+
 
 class Transaction(models.Model):
     TRANSACTION_TYPE = (

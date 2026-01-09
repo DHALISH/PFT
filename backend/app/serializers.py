@@ -24,10 +24,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    is_default = serializers.BooleanField(read_only=True)
+
     class Meta:
         model = Category
-        fields = ["id", "name", "description", "user"]
-        read_only_fields = ["user"]
+        fields = ["id", "name", "description", "user", "is_default"]
+        read_only_fields = ["user", "is_default"]
         
 
 class TransactionSerializer(serializers.ModelSerializer):

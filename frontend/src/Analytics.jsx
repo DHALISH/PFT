@@ -226,7 +226,7 @@ const Analytics = () => {
           <div className="col-md-9">
             <div className="card" style={{ height: "600px" }}>
               <div className="card-header d-flex justify-content-between">
-                <strong>Last {months} months</strong>
+                <strong>Last {months} Months</strong>
                 <div className="btn-group">
                   {[3, 6, 12].map((m) => (
                     <button
@@ -241,6 +241,7 @@ const Analytics = () => {
               </div>
 
               <div className="px-3 pt-2">
+                <strong> Months:</strong>
                 <input
                   type="range"
                   min="1"

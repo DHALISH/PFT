@@ -15,6 +15,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth
+from django.db.models import Q
 
 class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
@@ -40,16 +41,21 @@ def login_view(request):
         })
 
     return Response({"error": "Invalid credentials"}, status=400)
+
 class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Category.objects.filter(user=self.request.user)
+        user = self.request.user
+        return Category.objects.filter(
+            Q(is_default=True) | Q(user=user)
+        )
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user, is_default=False)
+
 
 class TransactionViewSet(ModelViewSet):
     serializer_class = TransactionSerializer
