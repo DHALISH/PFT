@@ -225,6 +225,7 @@ const Transactions_history = () => {
           </table>
         </div>
       </div>
+      
     </>
   );
 };

@@ -1,4 +1,6 @@
-/* Global */
+/* ================================
+   Global
+================================ */
 html, body {
   margin: 0;
   padding: 0;
@@ -6,11 +8,14 @@ html, body {
   background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
+/* Navbar spacing (matches navbar height) */
 body {
-  padding-top: 100px;
+  padding-top: 70px;
 }
 
-/* Navbar */
+/* ================================
+   Navbar
+================================ */
 .black-navbar {
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(12px);
@@ -21,16 +26,26 @@ body {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Dashboard */
+/* ================================
+   Dashboard Layout
+================================ */
 .dashboard-section {
   background: #f4f9ff;
   border-radius: 24px;
-  padding: 50px 0;
   max-width: 1200px;
-  margin: auto;
+  margin: 20px auto 40px auto; /* MOVED UP cleanly */
+  padding: 40px 0;
 }
 
-/* Top Cards */
+/* Center heading block */
+.text-center {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ================================
+   Feature Cards
+================================ */
 .feature-card {
   background: white;
   border-radius: 20px;
@@ -38,6 +53,7 @@ body {
   color: black;
   text-align: center;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  margin-top: -1px;
 }
 
 .feature-card i {
@@ -46,33 +62,30 @@ body {
   margin-bottom: 15px;
 }
 
-/* Info Cards */
+/* ================================
+   Info Cards
+================================ */
 .info-card {
   background: #eef6ff;
   border-radius: 16px;
   padding: 20px;
   height: 100%;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  margin-top: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .info-card h6 {
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.link-text {
-  color: #3b82f6;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* Quick Actions */
+/* ================================
+   Quick Actions
+================================ */
 .quick-actions {
   background: #eef6ff;
   border-radius: 18px;
   padding: 25px;
-  margin-top: -40px;
+  margin-top: -20px; /* subtle lift */
   box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
@@ -90,14 +103,97 @@ body {
   font-weight: 600;
 }
 
-.action-primary { border: 2px solid #3b82f6; color: #3b82f6; }
-.action-secondary { border: 2px solid #64748b; color: #64748b; }
-.action-warning { border: 2px solid #f59e0b; color: #f59e0b; }
-.action-success { border: 2px solid #10b981; color: #10b981; }
+/* ================================
+   Utility
+================================ */
+.link-text {
+  color: #3b82f6;
+  font-weight: 600;
+  cursor: pointer;
+}
+.footer {
+  background: #0e0e0e;
+  color: #ddd;
+  padding: 22px 20px 8px;
+  margin-top: 30px;
+}
 
-/* Mobile */
+/* Layout */
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Headings */
+.footer h4 {
+  font-size: 17px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.footer h5 {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+/* Text & links */
+.footer p,
+.footer a {
+  font-size: 13px;
+  color: #bbb;
+  text-decoration: none;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.footer a:hover {
+  color: #00d09c;
+}
+
+/* Social icons */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.social-icons a {
+  font-size: 17px;
+  color: #bbb;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-icons a:hover {
+  color: #00d09c;
+  transform: translateY(-2px);
+}
+
+/* Bottom copyright */
+.footer-bottom {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  border-top: 1px solid #222;
+  margin-top: 16px;
+  padding-top: 6px;
+}
+
+
+/* ================================
+   Mobile
+================================ */
 @media (max-width: 768px) {
+  body {
+    padding-top: 90px;
+  }
+
   .dashboard-section {
-    margin: 0 10px;
+    margin: 10px;
+    padding: 30px 10px;
   }
 }

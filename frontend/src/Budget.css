@@ -1,61 +1,158 @@
-/* Global */
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
+/* ================================
+   PAGE WRAPPER
+================================ */
+.budgets-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: "Poppins", sans-serif;
 }
 
-body {
-  padding-top: 100px;
-}
-
-/* Navbar */
-.black-navbar {
+/* ================================
+   NAVBAR
+================================ */
+.budgets-page .black-navbar {
   background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(12px);
-  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
   margin: 16px auto;
   max-width: 1200px;
   height: 70px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
 }
 
-
-
-
-
-
-.budget-page {
-  min-height: calc(100vh - 56px);
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 80px;
+/* ================================
+   MAIN CONTENT
+================================ */
+.budgets-content {
+  flex: 1;                     /* pushes footer down */
+  padding-top: 100px;
 }
 
+.budget-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 15px 30px;
+}
+
+/* ================================
+   BUDGET CARD
+================================ */
 .budget-card {
-  width: 800px;
-  background:  linear-gradient(135deg, #667eea, #764ba2);
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  position: relative;   /* 🔥 REQUIRED */
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  max-width: 420px;
 }
 
-.budget-header {
-  background: #0d6efd;
-  color:  linear-gradient(135deg, #667eea, #764ba2);
-  font-size: 20px;
+
+.budget-card h5 {
+  color: #3b82f6;
   font-weight: 600;
-  padding: 15px 20px;
-  border-radius: 10px 10px 0 0;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+
+  cursor: pointer;
+  z-index: 10;
+}
+
+.delete-btn:hover {
+  background: #e63946;
 }
 
 
+/* ================================
+   EMPTY STATE
+================================ */
+.empty-budget-card {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 22px;
+  padding: 50px;
+  text-align: center;
+  color: #ffffff;
+}
 
-/* Mobile */
+/* ================================
+   FOOTER (SMALL + BOTTOM)
+================================ */
+.footer {
+  background: #0b0b0b;
+  color: #aaa;
+  padding: 13px 10px 10px;     /* ⬅ reduced height */
+  font-size: 10px;            /* ⬅ smaller text */
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;                   /* ⬅ tighter spacing */
+}
+
+.footer h4,
+.footer h5 {
+  color: #ffffff;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.footer p {
+  margin-bottom: 4px;
+}
+
+.footer a {
+  color: #aaa;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.footer a:hover {
+  color: #3b82f6;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #777;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 8px;
+}
+
+/* ================================
+   MOBILE
+================================ */
 @media (max-width: 768px) {
-  .dashboard-section {
-    margin: 0 10px;
+  .budgets-content {
+    padding-top: 110px;
+  }
+
+  .budget-container {
+    padding: 20px 12px;
+  }
+
+  .footer {
+    font-size: 12px;
   }
 }

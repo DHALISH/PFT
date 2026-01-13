@@ -171,3 +171,64 @@ def analytics_view(request):
         "balance": float(balance),
         "top_expenses": top_expenses,
     })
+
+
+
+from django.db.models import Sum
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
+from .models import Transaction, Budget
+from .serializers import BudgetlistSerializer, TransactionSerializer
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def dashboard_view(request):
+    user = request.user
+
+    # --------------------
+    # TRANSACTION TOTALS
+    # --------------------
+    total_income = (
+        Transaction.objects
+        .filter(user=user, type="income")
+        .aggregate(total=Sum("amount"))["total"] or 0
+    )
+
+    total_expense = (
+        Transaction.objects
+        .filter(user=user, type="expense")
+        .aggregate(total=Sum("amount"))["total"] or 0
+    )
+
+    balance = total_income - total_expense
+    Category_name=Transaction.objects.filter(user=user).values_list('category__name', flat=True).distinct()
+
+    # --------------------
+    # BUDGET DATA
+    # --------------------
+    budgets = Budget.objects.filter(user=user)
+    budget_data = BudgetlistSerializer(budgets, many=True).data
+
+    # --------------------
+    # TRANSACTION HISTORY
+    # --------------------
+    transactions = (
+        Transaction.objects
+        .filter(user=user)
+        .order_by("-date")[:10]   # latest 10 transactions
+    )
+    transaction_data = TransactionSerializer(transactions, many=True).data
+
+    return Response({
+        "total_income": total_income,
+        "total_expense": total_expense,
+        "balance": balance,
+        "budgets": budget_data,
+        "transactions": transaction_data,
+        "category_name": Category_name,
+         
+        
+    })

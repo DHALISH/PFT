@@ -22,6 +22,7 @@ from app.views import (
     BudgetCreateView,
     BudgetListAPIView,
     UserCreateView,
+    dashboard_view,
     login_view,
     CategoryViewSet,
     TransactionViewSet,
@@ -43,6 +44,7 @@ urlpatterns = [
     path('api/budget/add/', BudgetCreateView.as_view(), name='budget-add'),
     path('api/budgets/', BudgetListAPIView.as_view(), name='budget-list'),
     path('api/analytics/', analytics_view, name='analytics'),
+    path('api/dashboard/', dashboard_view, name='dashboard'),
 
     # Router APIs
     path('api/', include(router.urls)),

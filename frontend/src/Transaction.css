@@ -6,8 +6,9 @@ html, body {
   background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
+/* FIX: navbar spacing */
 body {
-  padding-top: 100px;
+  padding-top: 70px; /* exact navbar height */
 }
 
 /* Navbar */
@@ -21,74 +22,22 @@ body {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* Dashboard */
-.dashboard-section {
-  background: #f4f9ff;
-  border-radius: 24px;
-  padding: 50px 0;
-  max-width: 1200px;
-  margin: auto;
+/* Page heading */
+h2 {
+  margin-top: -60px;
 }
 
-/* Top Cards */
-.feature-card {
-  background: white;
-  border-radius: 20px;
-  padding: 30px;
-  color: black;
-  text-align: center;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+/* Main container positioning */
+.container {
+  margin-top: 0 !important;
 }
 
-.feature-card i {
-  font-size: 36px;
-  color: #fbbf24;
-  margin-bottom: 15px;
-}
-
-/* Info Cards */
-.info-card {
-  background: #eef6ff;
-  border-radius: 16px;
-  padding: 20px;
-  height: 100%;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  margin-top: 20px;
-}
-
-.info-card h6 {
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.link-text {
-  color: #3b82f6;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* Quick Actions */
-.quick-actions {
-  background: #eef6ff;
+/* Card */
+.card {
   border-radius: 18px;
-  padding: 25px;
-  margin-top: -40px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
-.action-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 15px;
-}
-
-.action-buttons .btn {
-  flex: 1;
-  min-width: 180px;
-  border-radius: 12px;
-  font-weight: 600;
-}
+/* History button */
 .btn-history-sm {
   width: auto !important;
   padding: 6px 14px;
@@ -96,19 +45,17 @@ body {
   border-radius: 999px;
   white-space: nowrap;
   flex: 0 0 auto !important;
-  margin-left: 250px;
+  margin-left: auto; /* FIXED alignment */
 }
 
 
-
-.action-primary { border: 2px solid #3b82f6; color: #3b82f6; }
-.action-secondary { border: 2px solid #64748b; color: #64748b; }
-.action-warning { border: 2px solid #f59e0b; color: #f59e0b; }
-.action-success { border: 2px solid #10b981; color: #10b981; }
-
 /* Mobile */
 @media (max-width: 768px) {
-  .dashboard-section {
-    margin: 0 10px;
+  body {
+    padding-top: 90px;
+  }
+
+  .container {
+    padding: 0 12px;
   }
 }
