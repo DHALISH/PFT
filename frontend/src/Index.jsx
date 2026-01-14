@@ -25,19 +25,13 @@ const Index = () => {
 
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item ms-2">
-                <a className="nav-link text-white" href="#features">Features</a>
+              <li className="nav-item ms-3">
+                <a className="btn btn-outline-light btn-sm" href="#features">Features</a>
               </li>
-              <li className="nav-item ms-2">
-                <a className="nav-link text-white" href="#">About</a>
-              </li>
-              <li className="nav-item ms-2">
-                <a className="nav-link text-white" href="#">Contact</a>
-              </li>
-              <li className="nav-item ms-2">
+              <li className="nav-item ms-3">
                 <a className="btn btn-outline-light btn-sm" href="/signin">Login</a>
               </li>
-              <li className="nav-item ms-2">
+              <li className="nav-item ms-3">
                 <a className="btn btn-light btn-sm" href="/signup">Sign Up</a>
               </li>
             </ul>
