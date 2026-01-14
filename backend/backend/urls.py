@@ -19,6 +19,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from app.views import (
+    AdminUserListView,
     BudgetCreateView,
     BudgetListAPIView,
     UserCreateView,
@@ -34,7 +35,7 @@ router.register(r'categories', CategoryViewSet, basename='categories')
 router.register(r'transactions', TransactionViewSet, basename='transactions')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
 
     # Auth APIs
     path('api/signup/', UserCreateView.as_view(), name='signup'),
@@ -45,6 +46,7 @@ urlpatterns = [
     path('api/budgets/', BudgetListAPIView.as_view(), name='budget-list'),
     path('api/analytics/', analytics_view, name='analytics'),
     path('api/dashboard/', dashboard_view, name='dashboard'),
+    path("api/admin/users/", AdminUserListView.as_view(), name="admin/users"),
 
     # Router APIs
     path('api/', include(router.urls)),

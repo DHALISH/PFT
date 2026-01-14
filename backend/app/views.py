@@ -1,7 +1,7 @@
 from rest_framework.generics import CreateAPIView
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
+from .serializers import AdminUserSerializer, UserSerializer
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
@@ -16,12 +16,14 @@ from rest_framework.permissions import AllowAny
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth
 from django.db.models import Q
+from rest_framework.permissions import IsAdminUser
 
 class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny] 
     authentication_classes = [] 
+
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
@@ -37,7 +39,8 @@ def login_view(request):
         return Response({
             "token": token.key,
             "user_id": user.id,
-            "username": user.username
+            "username": user.username,
+            "is_admin": user.is_superuser,
         })
 
     return Response({"error": "Invalid credentials"}, status=400)
@@ -232,3 +235,12 @@ def dashboard_view(request):
          
         
     })
+
+
+class AdminUserListView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        users = User.objects.all()
+        serializer = AdminUserSerializer(users, many=True)
+        return Response(serializer.data)

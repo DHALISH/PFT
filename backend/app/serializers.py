@@ -83,3 +83,12 @@ class BudgetlistSerializer(serializers.ModelSerializer):
 
 
 
+class AdminUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "username",
+            "email",
+            "date_joined"
+        ]

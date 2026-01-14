@@ -58,7 +58,7 @@ const Index = () => {
               </p>
 
               <div className="d-flex gap-3 mb-4">
-                <a href="/register" className="btn btn-gradient btn-lg">
+                <a href="/signup" className="btn btn-gradient btn-lg">
                   <i className="fas fa-rocket me-2"></i>Get Started Free
                 </a>
                 <a href="/signin" className="btn btn-outline-light btn-lg">

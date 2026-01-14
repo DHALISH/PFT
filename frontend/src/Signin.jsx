@@ -18,37 +18,43 @@ function Signin() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/login/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (response.ok) {
-        // ✅ Store auth data
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user_id", data.user_id);
-        localStorage.setItem("username", data.username);
+    if (response.ok) {
+      // ✅ Store auth data
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user_id", data.user_id);
+      localStorage.setItem("username", data.username);
+      localStorage.setItem("is_admin", data.is_admin); // ✅ store admin flag
 
-        alert("Login successful ✅");
+      alert("Login successful ✅");
 
-        // ✅ Redirect to dashboard
-        navigate("/dashboard");
+      // ✅ Redirect based on role
+      if (data.is_admin) {
+        navigate("/adminpage");       // admin page
       } else {
-        alert(data.error || "Invalid username or password ❌");
+        navigate("/dashboard");   // normal user
       }
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("Server error. Try again later.");
+    } else {
+      alert(data.error || "Invalid username or password ❌");
     }
-  };
+  } catch (error) {
+    console.error("Login error:", error);
+    alert("Server error. Try again later.");
+  }
+};
+
 
   return (
     <div className="login-page">

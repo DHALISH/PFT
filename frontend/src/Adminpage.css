@@ -1,0 +1,10 @@
+.black-navbar {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  margin: 12px auto;
+  max-width: 1200px;
+  height: 70px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
