@@ -41,7 +41,7 @@ const Budget = () => {
       });
 
       if (response.ok) {
-        navigate("/budgets_list");
+        navigate("/budget_list");
       } else {
         const errorData = await response.json();
         console.error("Error saving budget:", errorData);
@@ -222,12 +222,12 @@ const Budget = () => {
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/budget_list")}
               >
                 ← Cancel
               </button>
 
-              <button type="submit" className="btn btn-primary" onClick={() => navigate("/budgets_list")}>
+              <button type="submit" className="btn btn-primary">
                 <i className="fas fa-check-circle me-1"></i>
                 Create Budget
               </button>
@@ -235,42 +235,6 @@ const Budget = () => {
           </form>
         </div>
       </div>
-      <footer className="footer">
-        <div className="footer-container">
-                      
-          <div className="footer-brand">
-            <h4>Finance Tracker</h4>
-            <p>Manage your income & expenses smarter.</p>
-          </div>
-                      
-          <div className="footer-links">
-            <h5>Quick Links</h5>
-            <a href="#">Dashboard</a>
-            <a href="#">Budgets</a>
-            <a href="#">Analytics</a>
-          </div>
-                      
-          <div className="footer-contact">
-            <h5>Contact</h5>
-            <p>Email: support@financetracker.com</p>
-            <p>Phone: +91 98765 43210</p>
-          </div>
-                      
-          <div className="footer-social">
-            <h5>Follow Us</h5>
-            <div className="social-icons">
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-x-twitter"></i></a>
-              <a href="#"><i className="fab fa-facebook"></i></a>
-            </div>
-          </div>
-                      
-        </div>
-                      
-        <div className="footer-bottom">
-          © 2026 Finance Tracker. All rights reserved.
-        </div>
-      </footer>
                       
     </>
   );

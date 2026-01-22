@@ -15,19 +15,20 @@ const Analytics = () => {
 
   const username = localStorage.getItem("username") || "User";
 
-  // ===============================
-  // STATES
-  // ===============================
+  /* ===================== STATES ===================== */
   const [incomeData, setIncomeData] = useState(Array(12).fill(0));
   const [expenseData, setExpenseData] = useState(Array(12).fill(0));
   const [topExpenses, setTopExpenses] = useState([]);
   const [months, setMonths] = useState(12);
 
+  // 🔥 Toggle states
+  const [showIncome, setShowIncome] = useState(true);
+  const [showExpense, setShowExpense] = useState(true);
+  const [showBalance, setShowBalance] = useState(true);
+
   const currentYear = new Date().getFullYear();
 
-  // ===============================
-  // FETCH ANALYTICS
-  // ===============================
+  /* ===================== FETCH DATA ===================== */
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -48,39 +49,21 @@ const Analytics = () => {
       .catch(console.error);
   }, []);
 
-  // ===============================
-  // VISIBLE DATA
-  // ===============================
-  const visibleLabels = useMemo(
-    () => MONTH_LABELS.slice(0, months),
-    [months]
-  );
-
-  const visibleIncome = useMemo(
-    () => incomeData.slice(0, months),
-    [incomeData, months]
-  );
-
-  const visibleExpense = useMemo(
-    () => expenseData.slice(0, months),
-    [expenseData, months]
-  );
-
+  /* ===================== VISIBLE DATA ===================== */
+  const visibleLabels = useMemo(() => MONTH_LABELS.slice(0, months), [months]);
+  const visibleIncome = useMemo(() => incomeData.slice(0, months), [incomeData, months]);
+  const visibleExpense = useMemo(() => expenseData.slice(0, months), [expenseData, months]);
   const visibleBalance = useMemo(
     () => visibleIncome.map((v, i) => v - (visibleExpense[i] || 0)),
     [visibleIncome, visibleExpense]
   );
 
-  // ===============================
-  // TOTALS
-  // ===============================
+  /* ===================== TOTALS ===================== */
   const totalIncome = visibleIncome.reduce((a, b) => a + b, 0);
   const totalExpenses = visibleExpense.reduce((a, b) => a + b, 0);
   const netBalance = totalIncome - totalExpenses;
 
-  // ===============================
-  // CHART
-  // ===============================
+  /* ===================== CHART ===================== */
   useEffect(() => {
     if (!chartRef.current) return;
     if (chartInstance.current) chartInstance.current.destroy();
@@ -90,33 +73,33 @@ const Analytics = () => {
       data: {
         labels: visibleLabels,
         datasets: [
-          {
+          showIncome && {
             label: "Income",
             data: visibleIncome,
             borderColor: "#36cfc9",
             backgroundColor: "rgba(54, 207, 201, 0.3)",
             borderWidth: 3,
             fill: true,
-            tension: 0.45,
+            tension: 0.4,
           },
-          {
+          showExpense && {
             label: "Expenses",
             data: visibleExpense,
             borderColor: "#ff4d4f",
             backgroundColor: "rgba(255, 77, 79, 0.3)",
             borderWidth: 3,
             fill: true,
-            tension: 0.45,
+            tension: 0.4,
           },
-          {
+          showBalance && {
             label: "Balance",
             data: visibleBalance,
             borderColor: "#fadb14",
             borderWidth: 3,
             fill: false,
-            tension: 0.45,
+            tension: 0.4,
           },
-        ],
+        ].filter(Boolean),
       },
       options: {
         responsive: true,
@@ -143,64 +126,60 @@ const Analytics = () => {
         },
       },
     });
-  }, [visibleLabels, visibleIncome, visibleExpense, visibleBalance, currentYear]);
+  }, [
+    visibleLabels,
+    visibleIncome,
+    visibleExpense,
+    visibleBalance,
+    showIncome,
+    showExpense,
+    showBalance,
+    currentYear,
+  ]);
 
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
   };
 
-  // ===============================
-  // UI
-  // ===============================
+  /* ===================== UI ===================== */
   return (
     <>
       {/* NAVBAR */}
       <nav className="navbar navbar-expand-lg fixed-top navbar-dark black-navbar">
         <div className="container-fluid px-4">
           <span className="navbar-brand fw-bold text-white">
-            <i className="fas fa-chart-line me-2"></i>
-            FinanceTracker Pro
+            <i className="fas fa-chart-line me-2"></i>FinanceTracker Pro
           </span>
 
-          <div className="collapse navbar-collapse show">
-            <ul className="navbar-nav ms-auto align-items-center">
-              <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/dashboard">Dashboard</Link>
-              </li>
-              <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/transactions">Transactions</Link>
-              </li>
-              <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/category_list">Categories</Link>
-              </li>
-              <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/budget_list">Budget</Link>
-              </li>
-              <li className="nav-item ms-3">
-                <Link className="nav-link text-white" to="/analytics">Analytics</Link>
-              </li>
+          <ul className="navbar-nav ms-auto align-items-center">
+            <li className="nav-item"><Link className="nav-link text-white" to="/dashboard">Dashboard</Link></li>
+            <li className="nav-item"><Link className="nav-link text-white" to="/transactions">Transactions</Link></li>
+            <li className="nav-item"><Link className="nav-link text-white" to="/category_list">Categories</Link></li>
+            <li className="nav-item"><Link className="nav-link text-white" to="/budget_list">Budget</Link></li>
+            <li className="nav-item"><Link className="nav-link text-white" to="/analytics">Analytics</Link></li>
 
-              <li className="nav-item dropdown ms-3">
-                <button className="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-                  {username}
-                </button>
-                <ul className="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <button className="dropdown-item text-danger" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+            <li className="nav-item dropdown ms-3">
+              <button className="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                {username}
+              </button>
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li>
+                  <button className="dropdown-item text-danger" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </nav>
 
       {/* CONTENT */}
       <div className="container mt-5 pt-4">
         <div className="row">
+
+          {/* SUMMARY */}
           <div className="col-md-3">
             <div className="card">
               <div className="card-body">
@@ -214,17 +193,17 @@ const Analytics = () => {
                 <ul className="small">
                   {topExpenses.length === 0 && <li>No data</li>}
                   {topExpenses.map((e, i) => (
-                    <li key={i}>
-                      {e.category} — ₹{e.amount} ({e.percentage}%)
-                    </li>
+                    <li key={i}>{e.category} — ₹{e.amount} ({e.percentage}%)</li>
                   ))}
                 </ul>
               </div>
             </div>
           </div>
 
+          {/* CHART */}
           <div className="col-md-9">
             <div className="card" style={{ height: "600px" }}>
+
               <div className="card-header d-flex justify-content-between">
                 <strong>Last {months} Months</strong>
                 <div className="btn-group">
@@ -239,9 +218,7 @@ const Analytics = () => {
                   ))}
                 </div>
               </div>
-
               <div className="px-3 pt-2">
-                <strong> Months:</strong>
                 <input
                   type="range"
                   min="1"
@@ -259,43 +236,6 @@ const Analytics = () => {
           </div>
         </div>
       </div>
-      <footer className="footer">
-        <div className="footer-container">
-                      
-          <div className="footer-brand">
-            <h4>Finance Tracker</h4>
-            <p>Manage your income & expenses smarter.</p>
-          </div>
-                      
-          <div className="footer-links">
-            <h5>Quick Links</h5>
-            <a href="#">Dashboard</a>
-            <a href="#">Budgets</a>
-            <a href="#">Analytics</a>
-          </div>
-                      
-          <div className="footer-contact">
-            <h5>Contact</h5>
-            <p>Email: support@financetracker.com</p>
-            <p>Phone: +91 98765 43210</p>
-          </div>
-                      
-          <div className="footer-social">
-            <h5>Follow Us</h5>
-            <div className="social-icons">
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-x-twitter"></i></a>
-              <a href="#"><i className="fab fa-facebook"></i></a>
-            </div>
-          </div>
-                      
-        </div>
-                      
-        <div className="footer-bottom">
-          © 2026 Finance Tracker. All rights reserved.
-        </div>
-      </footer>
-                      
     </>
   );
 };

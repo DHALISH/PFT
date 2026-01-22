@@ -29,22 +29,34 @@ const Budgets = () => {
       .catch(console.error);
   }, [token, navigate]);
 
-  const handleDeleteBudget = async (id) => {
-    if (!window.confirm("Delete this budget?")) return;
 
-    const res = await fetch(
-      `http://127.0.0.1:8000/api/budgets/${id}/`,
-      { method: "DELETE", headers: { Authorization: `Token ${token}` } }
-    );
-
-    if (res.ok) {
-      setBudgets((prev) => prev.filter((b) => b.id !== id));
-    }
-  };
 
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
+  };
+    // 🔹 Delete Budget
+  const handleDeleteBudget = async (id) => {
+    if (!window.confirm("Delete this budget?")) return;
+
+    try {
+      const res = await fetch(
+        `http://127.0.0.1:8000/api/budgets/${id}/`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to delete");
+
+      fetchCategories();
+    } catch (error) {
+      alert("Error deleting budget");
+      console.error(error);
+    }
   };
 
   return (
