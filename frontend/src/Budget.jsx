@@ -227,7 +227,7 @@ const Budget = () => {
                 ← Cancel
               </button>
 
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" onClick={() => navigate("/budgets_list")}>
                 <i className="fas fa-check-circle me-1"></i>
                 Create Budget
               </button>

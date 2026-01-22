@@ -242,14 +242,7 @@ const Dashboard = () => {
                       
           <div className="footer-brand">
             <h4>Finance Tracker</h4>
-            <p>Manage your income & expenses smarter.</p>
-          </div>
-                      
-          <div className="footer-links">
-            <h5>Quick Links</h5>
-            <a href="#">Dashboard</a>
-            <a href="#">Budgets</a>
-            <a href="#">Analytics</a>
+            <p>Smartly manage your income & expenses with clarity.</p>
           </div>
                       
           <div className="footer-contact">
@@ -261,18 +254,18 @@ const Dashboard = () => {
           <div className="footer-social">
             <h5>Follow Us</h5>
             <div className="social-icons">
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-x-twitter"></i></a>
-              <a href="#"><i className="fab fa-facebook"></i></a>
+              <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+              <a href="#" aria-label="Twitter"><i className="fab fa-x-twitter"></i></a>
+              <a href="#" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
             </div>
           </div>
-                      
         </div>
-                      
-        <div className="footer-bottom">
-          © 2026 Finance Tracker. All rights reserved.
-        </div>
+
+         <div className="footer-bottom">
+           © 2026 Finance Tracker. All rights reserved.
+         </div>
       </footer>
+
                       
     </>
   );

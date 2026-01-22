@@ -257,15 +257,7 @@ const Transactions = () => {
           <div className="footer-brand">
             <h4>Finance Tracker</h4>
             <p>Manage your income & expenses smarter.</p>
-          </div>
-                        
-          <div className="footer-links">
-            <h5>Quick Links</h5>
-            <a href="#">Dashboard</a>
-            <a href="#">Budgets</a>
-            <a href="#">Analytics</a>
-          </div>
-                        
+          </div>                  
           <div className="footer-contact">
             <h5>Contact</h5>
             <p>Email: support@financetracker.com</p>

@@ -35,7 +35,7 @@ router.register(r'categories', CategoryViewSet, basename='categories')
 router.register(r'transactions', TransactionViewSet, basename='transactions')
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 
     # Auth APIs
     path('api/signup/', UserCreateView.as_view(), name='signup'),
